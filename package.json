@@ -1,33 +1,53 @@
 {
-  "name": "create-react-app-lambda",
-  "version": "0.5.0",
-  "private": true,
-  "dependencies": {
-    "axios": "^0.19.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "^3.0.1"
-  },
+  "name": "react_template_repo",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "start:lambda": "netlify-lambda serve src/lambda",
-    "build": "run-p build:**",
-    "build:app": "react-scripts build",
-    "build:lambda": "netlify-lambda build src/lambda",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "mocha server/tests",
+    "install-all": "concurrently \"npm install\" \"cd client && npm install\"",
+    "client": "cd client && npm start",
+    "server": "nodemon server/server.js",
+    "dev": "concurrently \"nodemon server/server.js\" \"cd client && npm run start\"",
+    "build": "cd client && npm build",
+    "start": "node server/server.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UFWebApps/React_Template_Repo.git"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "netlify-lambda": "^1.4.5",
-    "npm-run-all": "^4.1.5"
-  }
+  "keywords": [],
+  "author": "Dakota Rennemann",
+  "license": "MIT",
+  "dependencies": {
+    "@fullcalendar/core": "^5.6.0",
+    "@fullcalendar/daygrid": "^5.6.0",
+    "@fullcalendar/list": "^5.6.0",
+    "@fullcalendar/react": "^5.6.0",
+    "@fullcalendar/timegrid": "^5.6.0",
+    "all": "0.0.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.0.0-beta3",
+    "concurrently": "^4.1.0",
+    "express": "^4.17.1",
+    "mocha": "^6.2.3",
+    "moment": "^2.29.1",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^1.19.4",
+    "react": "^17.0.2",
+    "react-big-calendar": "^0.33.2",
+    "react-bootstrap": "^1.5.2",
+    "react-bootstrap-carousel": "^4.1.1",
+    "react-event-calendar": "^0.3.0",
+    "react-router-dom": "^5.2.0",
+    "react-twitter-embed": "^3.0.3",
+    "should": "^13.2.3",
+    "styled-components": "5.1.0",
+    "supertest": "^4.0.2",
+    "typescript": "^4.2.4"
+  },
+  "homepage": "https://github.com/UFWebApps/React_Template_Repo#readme"
 }
