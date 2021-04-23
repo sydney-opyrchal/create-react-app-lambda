@@ -1,50 +1,40 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import React from 'react';
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
-  }
+import { Route, Switch, Redirect  } from 'react-router-dom';
+import Home from "./views/Home/Home"
+import Teams from "./views/Teams/Teams"
+import TheCalendar from "./views/TheCalendar/TheCalendar"
 
-  handleClick = api => e => {
-    e.preventDefault()
+import FitnessTips from "./views/FitnessTips/FitnessTips"
+import HealthTips from "./views/HealthTips/HealthTips"
+import CDC from "./views/CDC/CDC"
+import NotFound from "./views/NotFound"
+import Header from "./components/Header/Header"
+import Login from "./views/Login/login"
+import Workouts from "./views/Workouts/Workouts"
 
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
 
-  render() {
-    const { loading, msg } = this.state
-
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
-  }
+const App = () => {
+  return (
+    <div style={{ display: "flex"}}>
+      <Header />
+      <Switch>
+        <Route exact path="/Home" component={Home} />
+        <Route exact path="/">
+          <Redirect to="/Home" />
+        </Route>
+        <Route exact path="/Teams" component={Teams} />
+        <Route exact path="/Calendar" component={TheCalendar} /> 
+        <Route exact path="/FitnessTips" component={FitnessTips} />
+        <Route exact path="/HealthTips" component={HealthTips} />
+        <Route exact path="/Login" component={Login} />
+        <Route exact path="/CDCTips" component={CDC} />
+        <Route exact path="/Workouts" component={Workouts} />
+        
+        <Route component={NotFound}/>
+      </Switch>
+    </div>
+  );
 }
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
-}
-
-export default App
+export default App;
